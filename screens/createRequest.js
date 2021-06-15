@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity, TextInput, Button } from 'rea
 import { Formik } from 'formik';
 import * as yup from "yup";
 import { addBulletinList, getBulletinList } from '../shared/bulletinList';
-import { addRequestList } from '../shared/requestList';
+import { addRequestList, getRequestList } from '../shared/requestList';
 
 export default function CreateRequest({ navigation, route, params, setModalOpen }) {
   const {name, phone, postal, unit} = params;
@@ -17,23 +17,26 @@ export default function CreateRequest({ navigation, route, params, setModalOpen 
       phone: phone,
       postal: postal,
       unit: unit,
-      items: [favorDescription]
+      description: favorDescription
     }
   }
 
   return (
     <View style={styles.container}>
       <Formik
-        initialValues={{title: "", quantity: ""}}
+        initialValues={{description: ""}}
         // validationSchema={registerSchema}
         onSubmit={
           // store data in db 
           (values) => { 
-            let favor = createRequestObject(values);
+            console.log("values", values);
+            let favor = createRequestObject(values.description);
             console.log(favor);
             addBulletinList(favor);
             addRequestList(favor);
             console.log(getBulletinList());
+            console.log("request list below")
+            console.log(getRequestList());
             setModalOpen(false);
           }
         }
@@ -44,13 +47,13 @@ export default function CreateRequest({ navigation, route, params, setModalOpen 
             <Text>Description</Text>
             <TextInput 
               placeholder="Description"
-              onChangeText={handleChange("title")}
-              value={values.title}
-              onBlur={handleBlur("title")}
+              onChangeText={handleChange("description")}
+              value={values.description}
+              onBlur={handleBlur("description")}
             />
-            <Text>{touched.title && errors.title}</Text>
+            <Text>{touched.description && errors.description}</Text>
 
-            {/* Quantity */}
+            {/* Quantity
             <Text>Quantity</Text>
             <TextInput 
               placeholder="Quantity"
@@ -59,7 +62,7 @@ export default function CreateRequest({ navigation, route, params, setModalOpen 
               keyboardType="numeric"
               onBlur={handleBlur("quantity")}
             />
-            <Text>{touched.quantity && errors.quantity}</Text>
+            <Text>{touched.quantity && errors.quantity}</Text> */}
 
             <Button title="Create Favor" onPress={handleSubmit}/>
           </View>

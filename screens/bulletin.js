@@ -24,12 +24,13 @@ export default function BulletinPage({navigation, route}) {
           <View style={styles.favorContainer}>
             <Text>{item.name}</Text>
             <Text>{item.phone}</Text>
-            {item.items.map((favor) => (
+            <Text>{item.description}</Text>
+            {/* {item.items.map((favor) => (
               <View key={favor.title}>
                 <Text>{favor.title}</Text>
                 <Text>{favor.quantity}</Text>
               </View>
-            ))}
+            ))} */}
             <TouchableOpacity 
               style={styles.button}
               onPress={() => {

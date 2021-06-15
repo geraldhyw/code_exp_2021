@@ -5,10 +5,7 @@ let bulletinList = [
     phone: "98765432",
     postal: "123456",
     unit: "05-05",
-    items: [{
-      title: "HL Milk 1L",
-      quantity: "2"
-    }]
+    description: "HL Milk 1L"
   },
   {
     id: 2,
@@ -16,10 +13,7 @@ let bulletinList = [
     phone: "98769876",
     postal: "123456",
     unit: "06-06",
-    items: [{
-      title: "Eggs (10)",
-      quantity: "1"
-    }]
+    description: "A dozen of eggs"
   },
   {
     id: 3,
@@ -27,10 +21,7 @@ let bulletinList = [
     phone: "98989898",
     postal: "123455",
     unit: "07-07",
-    items: [{
-      title: "Green Tea (6 Cans)",
-      quantity: "1"
-    }]
+    description: "Green Tea (6 Cans)"
   },
 ];
 

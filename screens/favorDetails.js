@@ -9,12 +9,13 @@ export default function FavorDetails({navigation, route}) {
     <View style={styles.container}>
       <Text>{favorDetails.name}</Text>
       <Text>{favorDetails.phone}</Text>
-      {favorDetails.items.map((favor) => (
+      <Text>{favorDetails.description}</Text>
+      {/* {favorDetails.items.map((favor) => (
         <View key={favor.title}>
           <Text>{favor.title}</Text>
           <Text>{favor.quantity}</Text>
         </View>
-      ))}
+      ))} */}
 
       <TouchableOpacity 
         style={styles.button}
