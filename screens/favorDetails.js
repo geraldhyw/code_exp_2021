@@ -10,19 +10,12 @@ export default function FavorDetails({navigation, route}) {
       <Text>{favorDetails.name}</Text>
       <Text>{favorDetails.phone}</Text>
       <Text>{favorDetails.description}</Text>
-      {/* {favorDetails.items.map((favor) => (
-        <View key={favor.title}>
-          <Text>{favor.title}</Text>
-          <Text>{favor.quantity}</Text>
-        </View>
-      ))} */}
 
       <TouchableOpacity 
         style={styles.button}
         onPress={() => {
           addAcceptList(favorDetails);
           removeBulletinList(favorDetails);
-          // route.params.removeFavors(favorDetails);
           navigation.navigate("Bulletin")
         }}>
         <Text>Accept Favor</Text>

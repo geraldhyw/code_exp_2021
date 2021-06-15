@@ -34,12 +34,6 @@ export default function RequestList({ navigation, route }) {
             <Text>{item.name}</Text>
             <Text>{item.phone}</Text>
             <Text>{item.description}</Text>
-            {/* {item.items.map((favor) => (
-              <View key={favor.title}>
-                <Text>{favor.title}</Text>
-                <Text>{favor.quantity}</Text>
-              </View>
-            ))} */}
 
 
           </View>

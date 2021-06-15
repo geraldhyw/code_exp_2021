@@ -31,12 +31,8 @@ export default function CreateRequest({ navigation, route, params, setModalOpen 
           (values) => { 
             console.log("values", values);
             let favor = createRequestObject(values.description);
-            console.log(favor);
             addBulletinList(favor);
             addRequestList(favor);
-            console.log(getBulletinList());
-            console.log("request list below")
-            console.log(getRequestList());
             setModalOpen(false);
           }
         }
@@ -52,17 +48,6 @@ export default function CreateRequest({ navigation, route, params, setModalOpen 
               onBlur={handleBlur("description")}
             />
             <Text>{touched.description && errors.description}</Text>
-
-            {/* Quantity
-            <Text>Quantity</Text>
-            <TextInput 
-              placeholder="Quantity"
-              onChangeText={handleChange("quantity")}
-              value={values.quantity}
-              keyboardType="numeric"
-              onBlur={handleBlur("quantity")}
-            />
-            <Text>{touched.quantity && errors.quantity}</Text> */}
 
             <Button title="Create Favor" onPress={handleSubmit}/>
           </View>
