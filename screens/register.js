@@ -23,7 +23,7 @@ export default function RegisterPage(props) {
   return (
     <View style={styles.container}>
       <Formik
-        initialValues={{name: "", phone: "", postal: ""}}
+        initialValues={{name: "", phone: "", postal: "", unit: ""}}
         // validationSchema={registerSchema}
         onSubmit={
           // store data in db 
@@ -65,6 +65,15 @@ export default function RegisterPage(props) {
               onBlur={handleBlur("postal")}
             />
             <Text>{touched.postal && errors.postal}</Text>
+
+            {/* Unit No. */}
+            <TextInput 
+              placeholder="Unit No."
+              onChangeText={handleChange("unit")}
+              value={values.unit}
+              onBlur={handleBlur("unit")}
+            />
+            <Text>{touched.unit && errors.unit}</Text>
 
             <Button title="Register" onPress={handleSubmit}/>
           </View>

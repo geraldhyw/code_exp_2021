@@ -43,5 +43,5 @@ export function addBulletinList(favor) {
 }
 
 export function removeBulletinList(favor) {
-  bulletinList = bulletinList.splice(bulletinList.indexOf(favor), 1);
+  bulletinList.splice(bulletinList.indexOf(favor), 1);
 }

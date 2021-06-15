@@ -9,5 +9,5 @@ export function addAcceptList(favor) {
 }
 
 export function removeAcceptList(favor) {
-  acceptList = acceptList.splice(acceptList.indexOf(favor), 1);
+  acceptList.splice(acceptList.indexOf(favor), 1);
 }

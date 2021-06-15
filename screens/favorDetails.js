@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { addAcceptList, getAcceptList } from '../shared/acceptList';
+import { removeBulletinList } from '../shared/bulletinList';
 
 export default function FavorDetails({navigation, route}) {
   let favorDetails = route.params.favorDetails;
@@ -19,7 +20,8 @@ export default function FavorDetails({navigation, route}) {
         style={styles.button}
         onPress={() => {
           addAcceptList(favorDetails);
-          route.params.removeFavors(favorDetails);
+          removeBulletinList(favorDetails);
+          // route.params.removeFavors(favorDetails);
           navigation.navigate("Bulletin")
         }}>
         <Text>Accept Favor</Text>

@@ -14,7 +14,7 @@ export default function BottomNav(props) {
       <Bottom.Screen name="Bulletin" component={StackNav} initialParams={props.particulars}/>
       <Bottom.Screen name="Profile" component={Profile} />
       <Bottom.Screen name="Accept List" component={AcceptList} />
-      <Bottom.Screen name="Request List" component={RequestList} />
+      <Bottom.Screen name="Request List" component={RequestList} initialParams={props.particulars}/>
     </Bottom.Navigator>
   );
 }

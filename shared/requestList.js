@@ -9,5 +9,5 @@ export function addRequestList(favor) {
 }
 
 export function removeRequestList(favor) {
-  requestList = requestList.splice(requestList.indexOf(favor), 1);
+  requestList.splice(requestList.indexOf(favor), 1);
 }

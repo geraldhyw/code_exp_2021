@@ -1,29 +1,23 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native';
 import { getBulletinList } from '../shared/bulletinList';
+import { useIsFocused } from '@react-navigation/native';
 
 export default function BulletinPage({navigation, route}) {
-  const [favors, setFavors] = useState(getBulletinList());
-  const {name, phone, postal} = route.params;
-
-  function removeFavors(favor) {
-    favors.splice(favors.filter(checkPostal).indexOf(favor), 1);
-    console.log(favors.length)
-    if (favors.length === 0) {
-      setFavors([]);
-    } else {
-      setFavors(favors.filter(checkPostal));
-    }
-  }
-
+  
+  const {name, phone, postal, unit} = route.params;
   function checkPostal(favor) {
     return favor.postal == postal;
   }
 
+  let favors = getBulletinList().filter(checkPostal);
+  const isFocused = useIsFocused();
+
   return (
     <View style={styles.container}>
       <Text>Bulletin</Text>
-      <FlatList 
+      {isFocused ? 
+      (<FlatList 
         data={favors.filter(checkPostal)}
         keyExtractor={item => item.id.toString()}
         renderItem={({item}) => (
@@ -40,15 +34,14 @@ export default function BulletinPage({navigation, route}) {
               style={styles.button}
               onPress={() => {
                 navigation.navigate("Favour Details", {
-                  favorDetails: item,
-                  removeFavors: removeFavors
+                  favorDetails: item
                 });
               }}>
               <Text>See More</Text>
             </TouchableOpacity>
           </View>
         )}
-      />
+      />):<FlatList />}
     </View>
   );
 }
