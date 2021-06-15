@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity, FlatList } from 'react-native
 import { getAcceptList, removeAcceptList } from '../shared/acceptList';
 import { useIsFocused } from '@react-navigation/native';
 import { removeRequestList } from '../shared/requestList';
+import { removeId } from '../shared/idList';
 
 export default function AcceptList({navigation}) {
   const [trigger, setTrigger] = useState(false);
@@ -25,6 +26,7 @@ export default function AcceptList({navigation}) {
               onPress={() => {
                 removeAcceptList(item);
                 removeRequestList(item);
+                removeId(item.id);
                 setTrigger(!trigger);
               }}>
               <Text>Complete</Text>

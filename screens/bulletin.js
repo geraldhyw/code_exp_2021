@@ -10,7 +10,11 @@ export default function BulletinPage({navigation, route}) {
     return favor.postal == postal;
   }
 
-  let favors = getBulletinList().filter(checkPostal);
+  function checkUser(favor) {
+    return favor.phone != phone;
+  }
+
+  let favors = getBulletinList().filter(checkPostal).filter(checkUser);
   const isFocused = useIsFocused();
 
   return (
@@ -25,7 +29,7 @@ export default function BulletinPage({navigation, route}) {
             <Text>{item.name}</Text>
             <Text>{item.phone}</Text>
             <Text>{item.description}</Text>
-            
+
             <TouchableOpacity 
               style={styles.button}
               onPress={() => {

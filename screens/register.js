@@ -5,18 +5,20 @@ import * as yup from "yup";
 
 // can do login page + authentication page if got time
 
-// const registerSchema = yup.object({
-//   name: yup.string()
-//       .required(),
-//   phone: yup.string()
-//       .required()
-//       .min(8)
-//       .max(8),
-//   postal: yup.string()
-//       .required()
-//       .min(6)
-//       .max(6)
-// })
+const registerSchema = yup.object({
+  name: yup.string()
+      .required(),
+  phone: yup.string()
+      .required()
+      .min(8)
+      .max(8),
+  postal: yup.string()
+      .required()
+      .min(6)
+      .max(6),
+  unit: yup.string()
+      .required()
+})
 
 
 export default function RegisterPage(props) {
@@ -24,7 +26,7 @@ export default function RegisterPage(props) {
     <View style={styles.container}>
       <Formik
         initialValues={{name: "", phone: "", postal: "", unit: ""}}
-        // validationSchema={registerSchema}
+        validationSchema={registerSchema}
         onSubmit={
           // store data in db 
           (values) => { 

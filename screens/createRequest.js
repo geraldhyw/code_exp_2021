@@ -4,12 +4,19 @@ import { Formik } from 'formik';
 import * as yup from "yup";
 import { addBulletinList, getBulletinList } from '../shared/bulletinList';
 import { addRequestList, getRequestList } from '../shared/requestList';
+import { generateId } from '../shared/idList';
+
+const createFavorSchema = yup.object({
+  description: yup.string()
+      .required()
+})
 
 export default function CreateRequest({ navigation, route, params, setModalOpen }) {
   const {name, phone, postal, unit} = params;
 
   function createRequestObject(favorDescription) {
-    let randomId = Math.floor(Math.random() * 10000);
+    let randomId = generateId();
+    console.log(randomId);
 
     return {
       id: randomId,
@@ -25,11 +32,10 @@ export default function CreateRequest({ navigation, route, params, setModalOpen 
     <View style={styles.container}>
       <Formik
         initialValues={{description: ""}}
-        // validationSchema={registerSchema}
+        validationSchema={createFavorSchema}
         onSubmit={
           // store data in db 
           (values) => { 
-            console.log("values", values);
             let favor = createRequestObject(values.description);
             addBulletinList(favor);
             addRequestList(favor);
@@ -42,6 +48,7 @@ export default function CreateRequest({ navigation, route, params, setModalOpen 
             {/* Description */}
             <Text>Description</Text>
             <TextInput 
+              multiline
               placeholder="Description"
               onChangeText={handleChange("description")}
               value={values.description}
