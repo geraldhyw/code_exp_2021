@@ -27,7 +27,9 @@ export default function RegisterPage(props) {
         // validationSchema={registerSchema}
         onSubmit={
           // store data in db 
-          () => { 
+          (values) => { 
+            console.log(values);
+            props.setParticulars(values);
             props.setLoggedIn(true);
             console.log("completed");
           }

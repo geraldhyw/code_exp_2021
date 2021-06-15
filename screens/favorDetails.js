@@ -1,20 +1,27 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { addAcceptList, getAcceptList } from '../shared/acceptList';
 
-export default function FavorDetails({route}) {
+export default function FavorDetails({navigation, route}) {
   let favorDetails = route.params.favorDetails;
   return (
     <View style={styles.container}>
       <Text>{favorDetails.name}</Text>
       <Text>{favorDetails.phone}</Text>
       {favorDetails.items.map((favor) => (
-        <View key="favor.title">
+        <View key={favor.title}>
           <Text>{favor.title}</Text>
           <Text>{favor.quantity}</Text>
         </View>
       ))}
 
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity 
+        style={styles.button}
+        onPress={() => {
+          addAcceptList(favorDetails);
+          route.params.removeFavors(favorDetails);
+          navigation.navigate("Bulletin")
+        }}>
         <Text>Accept Favor</Text>
       </TouchableOpacity>
     </View>
