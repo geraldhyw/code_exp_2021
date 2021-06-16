@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, FlatList, Modal, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, FlatList, Modal, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { getRequestList } from '../shared/requestList';
 import { useIsFocused } from '@react-navigation/native';
 import { MaterialIcons } from "@expo/vector-icons";
@@ -12,39 +12,49 @@ export default function RequestList({ navigation, route }) {
   return (
     <View style={styles.container}>
     <Text style={styles.title}>Requested Favours</Text>
-      {isFocused ? 
-      (<FlatList 
-        data={requestList}
-        keyExtractor={item => item.id.toString()}
-        renderItem={({item}) => (
+      {requestList.length === 0 ? (
+        <View style={styles.empty}>
           <View style={styles.favorContainer}>
-            <View style={styles.containerLeft}>
-              <Text style={styles.favorTitle}>{item.title}</Text>
-              <Text style={styles.favorTip}>Tip:</Text>
-              <Text>${item.tip}</Text>
-              <Text style={styles.favorDescription}>Description:</Text>
-              <Text>{item.description}</Text>
-            </View>
-
-            <View style={styles.containerRight}>
-              {item.status ? (
-                <View 
-                  style={styles.favorArrow}>
-                  <Ionicons name={"checkmark-circle"} size={40} color={"#A7E5CB"} />
-                  <Text>Accepted</Text>
-                </View>
-              ) : (
-                <View 
-                  style={styles.favorArrow}>
-                  <Ionicons name={"close-circle"} size={40} color={"#F0A79C"} />
-                  <Text>Pending</Text>
-                </View>
-              )}
-            </View>
+            <Text style={{alignContent:"center"}}>No Requested Favours</Text>
           </View>
-        )}
-      />)
-      : <FlatList />}
+        </View>
+      ) : (
+        <ScrollView>
+          {isFocused ? 
+          (<FlatList 
+            data={requestList}
+            keyExtractor={item => item.id.toString()}
+            renderItem={({item}) => (
+              <View style={styles.favorContainer}>
+                <View style={styles.containerLeft}>
+                  <Text style={styles.favorTitle}>{item.title}</Text>
+                  <Text style={styles.favorTip}>Tip:</Text>
+                  <Text>${item.tip}</Text>
+                  <Text style={styles.favorDescription}>Description:</Text>
+                  <Text>{item.description}</Text>
+                </View>
+
+                <View style={styles.containerRight}>
+                  {item.status ? (
+                    <View 
+                      style={styles.favorArrow}>
+                      <Ionicons name={"checkmark-circle"} size={40} color={"#A7E5CB"} />
+                      <Text>Accepted</Text>
+                    </View>
+                  ) : (
+                    <View 
+                      style={styles.favorArrow}>
+                      <Ionicons name={"close-circle"} size={40} color={"#F0A79C"} />
+                      <Text>Pending</Text>
+                    </View>
+                  )}
+                </View>
+              </View>
+            )}
+          />)
+          : <FlatList />}
+        </ScrollView>
+      )}
     </View>
   );
 }
@@ -58,6 +68,9 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: "bold",
+  },
+  empty: {
+    flex: 1,
   },
   favorContainer: {
     backgroundColor: "white",

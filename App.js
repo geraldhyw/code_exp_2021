@@ -9,7 +9,7 @@ export default function App() {
   const [particulars, setParticulars] = useState({
     postal: ""
   });
-  // console.disableYellowBox = true;
+  console.disableYellowBox = true;
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#FAFBFD',}}>

@@ -17,7 +17,7 @@ export default function AcceptList({navigation}) {
       {acceptList.length === 0 ? (
         <View style={styles.empty}>
           <View style={styles.favorContainer}>
-            <Text style={{alignContent:"center"}}>No Accepted Favors</Text>
+            <Text style={{alignContent:"center"}}>No Accepted Favours</Text>
           </View>
         </View>
       ) : (
