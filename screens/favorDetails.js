@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import { addAcceptList, getAcceptList } from '../shared/acceptList';
 import { removeBulletinList } from '../shared/bulletinList';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -9,42 +9,45 @@ export default function FavorDetails({navigation, route}) {
   return (
     <View style={styles.container}>
       {navigation.setOptions({ title: favorDetails.title })}
-      <Text style={styles.headerText}>Description</Text>
-      <View style={styles.detailsContainer}>
-        <Text>{favorDetails.description}</Text>
-      </View>
 
-      <Text style={styles.headerText}>Tip</Text>
-      <View style={styles.detailsContainer}>
-        <Text>${favorDetails.tip}</Text>
-      </View>
-
-      <View style={styles.particulars}>
-        <View style={styles.circle}>
-          <Ionicons name={"person"} size={60} color={"white"} />
+      <ScrollView>
+        <Text style={styles.headerText}>Description</Text>
+        <View style={styles.detailsContainer}>
+          <Text>{favorDetails.description}</Text>
         </View>
-        <Text style={styles.name}>{favorDetails.name}</Text>
-      </View>
 
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity 
-          style={styles.button}
-          onPress={() => {
-            navigation.navigate("Bulletin")
-          }}>
-            <Ionicons name={"close-circle"} size={60} color={"#F0A79C"} />
-        </TouchableOpacity>
+        <Text style={styles.headerText}>Tip</Text>
+        <View style={styles.detailsContainer}>
+          <Text>${favorDetails.tip}</Text>
+        </View>
 
-        <TouchableOpacity 
-          style={styles.button}
-          onPress={() => {
-            addAcceptList(favorDetails);
-            removeBulletinList(favorDetails);
-            navigation.navigate("Bulletin")
-          }}>
-            <Ionicons name={"checkmark-circle"} size={60} color={"#A7E5CB"} />
-        </TouchableOpacity>
-      </View>
+        <View style={styles.particulars}>
+          <View style={styles.circle}>
+            <Ionicons name={"person"} size={60} color={"white"} />
+          </View>
+          <Text style={styles.name}>{favorDetails.name}</Text>
+        </View>
+
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity 
+            style={styles.button}
+            onPress={() => {
+              navigation.navigate("Bulletin")
+            }}>
+              <Ionicons name={"close-circle"} size={60} color={"#F0A79C"} />
+          </TouchableOpacity>
+
+          <TouchableOpacity 
+            style={styles.button}
+            onPress={() => {
+              addAcceptList(favorDetails);
+              removeBulletinList(favorDetails);
+              navigation.navigate("Bulletin")
+            }}>
+              <Ionicons name={"checkmark-circle"} size={60} color={"#A7E5CB"} />
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
     </View>
   );
 }

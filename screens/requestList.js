@@ -6,24 +6,10 @@ import { MaterialIcons } from "@expo/vector-icons";
 import CreateRequest from './createRequest';
 
 export default function RequestList({ navigation, route }) {
-  const [modalOpen, setModalOpen] = useState(false);
   let requestList = getRequestList();
   const isFocused = useIsFocused();
   return (
     <View style={styles.container}>
-      <Modal visible={modalOpen} animationType="slide">
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <View style={styles.modalContent}>
-            <MaterialIcons 
-                name="close"
-                size={24}
-                style={styles.modalIcon}
-                onPress={() => setModalOpen(false)}
-            />
-            <CreateRequest params={route.params} setModalOpen={setModalOpen}/>
-          </View>
-        </TouchableWithoutFeedback>
-      </Modal>
       {isFocused ? 
       (<FlatList 
         style={styles.listContent}
@@ -34,19 +20,10 @@ export default function RequestList({ navigation, route }) {
             <Text>{item.name}</Text>
             <Text>{item.phone}</Text>
             <Text>{item.description}</Text>
-
-
           </View>
         )}
       />)
       : <FlatList />}
-      <TouchableOpacity 
-        style={styles.button}
-        onPress={() => {
-          setModalOpen(true);
-        }}>
-        <Text>Create New Favor</Text>
-      </TouchableOpacity>
     </View>
   );
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { Formik } from 'formik';
 import * as yup from "yup";
 
@@ -21,76 +21,78 @@ const registerSchema = yup.object({
 
 export default function RegisterPage(props) {
   return (
-    <View style={styles.container}>
-      <Text style={styles.headerText}>Sign Up</Text>
-      <Text style={styles.headerDescription}>Help us get to know you better</Text>
-      <Formik
-        initialValues={{name: "", phone: "", postal: "", unit: ""}}
-        // validationSchema={registerSchema}
-        onSubmit={
-          // store data in db 
-          (values) => { 
-            console.log(values);
-            props.setParticulars(values);
-            props.setLoggedIn(true);
-            console.log("completed");
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.container}>
+        <Text style={styles.headerText}>Sign Up</Text>
+        <Text style={styles.headerDescription}>Help us get to know you better</Text>
+        <Formik
+          initialValues={{name: "", phone: "", postal: "", unit: ""}}
+          // validationSchema={registerSchema}
+          onSubmit={
+            // store data in db 
+            (values) => { 
+              console.log(values);
+              props.setParticulars(values);
+              props.setLoggedIn(true);
+              console.log("completed");
+            }
           }
-        }
-      >
-        {({ handleChange, handleBlur, handleSubmit, values, touched, errors }) => (
-          <View>
-            {/* Name */}
-            <TextInput 
-              placeholder="Name"
-              onChangeText={handleChange("name")}
-              value={values.name}
-              onBlur={handleBlur("name")}
-              style={styles.inputContainer}
-            />
-            <Text>{touched.name && errors.name}</Text>
+        >
+          {({ handleChange, handleBlur, handleSubmit, values, touched, errors }) => (
+            <View>
+              {/* Name */}
+              <TextInput 
+                placeholder="Name"
+                onChangeText={handleChange("name")}
+                value={values.name}
+                onBlur={handleBlur("name")}
+                style={styles.inputContainer}
+              />
+              <Text>{touched.name && errors.name}</Text>
 
-            {/* Phone */}
-            <TextInput 
-              placeholder="Phone"
-              onChangeText={handleChange("phone")}
-              value={values.phone}
-              keyboardType="numeric"
-              onBlur={handleBlur("phone")}
-              style={styles.inputContainer}
-            />
-            <Text>{touched.phone && errors.phone}</Text>
+              {/* Phone */}
+              <TextInput 
+                placeholder="Phone"
+                onChangeText={handleChange("phone")}
+                value={values.phone}
+                keyboardType="numeric"
+                onBlur={handleBlur("phone")}
+                style={styles.inputContainer}
+              />
+              <Text>{touched.phone && errors.phone}</Text>
 
-            {/* Postal Code */}
-            <TextInput 
-              placeholder="Postal Code"
-              onChangeText={handleChange("postal")}
-              value={values.postal}
-              keyboardType="numeric"
-              onBlur={handleBlur("postal")}
-              style={styles.inputContainer}
-            />
-            <Text>{touched.postal && errors.postal}</Text>
+              {/* Postal Code */}
+              <TextInput 
+                placeholder="Postal Code"
+                onChangeText={handleChange("postal")}
+                value={values.postal}
+                keyboardType="numeric"
+                onBlur={handleBlur("postal")}
+                style={styles.inputContainer}
+              />
+              <Text>{touched.postal && errors.postal}</Text>
 
-            {/* Unit No. */}
-            <TextInput 
-              placeholder="Unit No."
-              onChangeText={handleChange("unit")}
-              value={values.unit}
-              onBlur={handleBlur("unit")}
-              style={styles.inputContainer}
-            />
-            <Text>{touched.unit && errors.unit}</Text>
+              {/* Unit No. */}
+              <TextInput 
+                placeholder="Unit No."
+                onChangeText={handleChange("unit")}
+                value={values.unit}
+                onBlur={handleBlur("unit")}
+                style={styles.inputContainer}
+              />
+              <Text>{touched.unit && errors.unit}</Text>
 
-            <TouchableOpacity
-              onPress={handleSubmit}
-              style={styles.button}>
-              <Text style={styles.buttonText}>Confirm</Text>
-            </TouchableOpacity>
-          </View>
-        )}
+              <TouchableOpacity
+                onPress={handleSubmit}
+                style={styles.button}>
+                <Text style={styles.buttonText}>Confirm</Text>
+              </TouchableOpacity>
+            </View>
+          )}
 
-      </Formik>
-    </View>
+        </Formik>
+      </View>
+    </TouchableWithoutFeedback>
   );
 }
 
