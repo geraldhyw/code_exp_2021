@@ -14,55 +14,49 @@ export default function AcceptList({navigation}) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Accepted Favours</Text>
-      <ScrollView>
-        {isFocused ? 
-        (<FlatList 
-          data={acceptList}
-          keyExtractor={item => item.id.toString()}
-          renderItem={({item}) => (
-            // <View style={styles.itemContainer}>
-            //   <Text>{item.name}</Text>
-            //   <Text>{item.phone}</Text>
-            //   <Text>{item.description}</Text>
+      {acceptList.length === 0 ? (
+        <View style={styles.empty}>
+          <View style={styles.favorContainer}>
+            <Text style={{alignContent:"center"}}>No Accepted Favors</Text>
+          </View>
+        </View>
+      ) : (
+        <ScrollView>
+          {isFocused ? 
+          (<FlatList 
+            data={acceptList}
+            keyExtractor={item => item.id.toString()}
+            renderItem={({item}) => (
 
-            //   <TouchableOpacity 
-            //     style={styles.button}
-            //     onPress={() => {
-                  // removeAcceptList(item);
-                  // removeRequestList(item);
-                  // removeId(item.id);
-                  // setTrigger(!trigger);
-            //     }}>
-            //     <Text>Complete</Text>
-            //   </TouchableOpacity>
-            // </View>
+              <View style={styles.favorContainer}>
+                <View style={styles.containerLeft}>
+                  <Text style={styles.favorTitle}>{item.title}</Text>
+                  <Text style={styles.favorTip}>Tip:</Text>
+                  <Text>${item.tip}</Text>
+                  <Text style={styles.favorDescription}>Description:</Text>
+                  <Text>{item.description}</Text>
+                  <Text style={styles.favorDescription}>Unit No:</Text>
+                  <Text>{item.unit}</Text>
+                </View>
 
-            <View style={styles.favorContainer}>
-              <View style={styles.containerLeft}>
-                <Text style={styles.favorTitle}>{item.title}</Text>
-                <Text style={styles.favorTip}>Tip:</Text>
-                <Text style={styles.favorTip}>${item.tip}</Text>
-                <Text style={styles.favorDescription}>Description:</Text>
-                <Text>{item.description}</Text>
+                <View style={styles.containerRight}>
+                  <TouchableOpacity 
+                    style={styles.favorArrow}
+                    onPress={() => {
+                      removeAcceptList(item);
+                      removeRequestList(item);
+                      removeId(item.id);
+                      setTrigger(!trigger);
+                    }}>
+                    <Ionicons name={"checkmark-circle"} size={40} color={"#A7E5CB"} />
+                  </TouchableOpacity>
+                </View>
               </View>
-
-              <View style={styles.containerRight}>
-                <TouchableOpacity 
-                  style={styles.favorArrow}
-                  onPress={() => {
-                    removeAcceptList(item);
-                    removeRequestList(item);
-                    removeId(item.id);
-                    setTrigger(!trigger);
-                  }}>
-                  <Ionicons name={"checkmark-circle"} size={40} color={"#A7E5CB"} />
-                </TouchableOpacity>
-              </View>
-            </View>
-          )}
-        />)
-        : <FlatList />}
-      </ScrollView>
+            )}
+          />)
+          : <FlatList />}
+        </ScrollView>
+      )}
       
     </View>
   );
@@ -77,6 +71,9 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: "bold",
+  },
+  empty: {
+    flex: 1,
   },
   favorContainer: {
     backgroundColor: "white",
@@ -95,7 +92,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between"
   },
   containerLeft: {
-
+    width: "80%",
   },
   containerRight: {
     alignSelf: "center"
@@ -106,9 +103,10 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
   },
   favorTip: {
-
+    fontWeight: "bold",
   },
   favorDescription: {
+    fontWeight: "bold",
     marginTop: 20,
   },
   favorArrow: {

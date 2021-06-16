@@ -40,8 +40,9 @@ export default function FavorDetails({navigation, route}) {
           <TouchableOpacity 
             style={styles.button}
             onPress={() => {
-              addAcceptList(favorDetails);
               removeBulletinList(favorDetails);
+              favorDetails.status = true;
+              addAcceptList(favorDetails);
               navigation.navigate("Bulletin")
             }}>
               <Ionicons name={"checkmark-circle"} size={60} color={"#A7E5CB"} />

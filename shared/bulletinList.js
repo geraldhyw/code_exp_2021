@@ -7,7 +7,8 @@ let bulletinList = [
     unit: "05-05",
     description: "HL Milk 1L",
     tip: "1.00",
-    title: "Buy me some milk"
+    title: "Buy me some milk",
+    status: false
   },
   {
     id: 2,
@@ -17,7 +18,8 @@ let bulletinList = [
     unit: "06-06",
     description: "A dozen of eggs",
     tip: "2.00",
-    title: "Buy me some eggs"
+    title: "Buy me some eggs",
+    status: false
   },
   {
     id: 3,
@@ -27,7 +29,8 @@ let bulletinList = [
     unit: "07-07",
     description: "Green Tea (6 Cans)",
     tip: "2.00",
-    title: "Buy me some drinks"
+    title: "Buy me some drinks",
+    status: false
   },
 ];
 
@@ -41,4 +44,9 @@ export function addBulletinList(favor) {
 
 export function removeBulletinList(favor) {
   bulletinList.splice(bulletinList.indexOf(favor), 1);
+}
+
+export function acceptFavor(favor) {
+  let index = bulletinList.indexOf(favor);
+  bulletinList[index].status = true;
 }

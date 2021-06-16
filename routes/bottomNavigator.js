@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import StackNav from './stackNavigator';
-import Profile from '../screens/profile';
+import Settings from '../screens/settings';
 import AcceptList from '../screens/acceptList';
 import RequestList from '../screens/requestList';
 
@@ -20,21 +20,22 @@ export default function BottomNav(props) {
 
         if (route.name === "Bulletin") {
           iconName = "clipboard";
-        } else if (route.name === "Accept List") {
+        } else if (route.name === "Accepted") {
           iconName = "checkmark-circle";
-        } else if (route.name === "Request List") {
+        } else if (route.name === "Requested") {
           iconName = "cart";
-        } else if (route.name === "Profile") {
-          iconName = "person";
+        } else if (route.name === "Settings") {
+          iconName = "settings";
         }
 
         return <Ionicons name={iconName} size={size} color={color} />;
       },
     })}>
       <Bottom.Screen name="Bulletin" component={StackNav} initialParams={props.particulars}/>
-      <Bottom.Screen name="Accept List" component={AcceptList} />
-      <Bottom.Screen name="Request List" component={RequestList} initialParams={props.particulars}/>
-      <Bottom.Screen name="Profile" component={Profile} />
+      <Bottom.Screen name="Accepted" component={AcceptList} />
+      <Bottom.Screen name="Requested" component={RequestList} initialParams={props.particulars}/>
+      <Bottom.Screen name="Settings" component={Settings} 
+      initialParams={props.particulars}/>
     </Bottom.Navigator>
   );
 }
