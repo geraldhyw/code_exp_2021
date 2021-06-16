@@ -27,7 +27,7 @@ export default function RegisterPage(props) {
         <Text style={styles.headerDescription}>Help us get to know you better</Text>
         <Formik
           initialValues={{name: "", phone: "", postal: "", unit: ""}}
-          // validationSchema={registerSchema}
+          validationSchema={registerSchema}
           onSubmit={
             // store data in db 
             (values) => { 
