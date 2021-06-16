@@ -42,7 +42,7 @@ export default function AcceptList({navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#FAFBFD',
     alignItems: 'center',
     justifyContent: 'center',
   },

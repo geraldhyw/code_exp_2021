@@ -1,9 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import { Formik } from 'formik';
 import * as yup from "yup";
-
-// can do login page + authentication page if got time
 
 const registerSchema = yup.object({
   name: yup.string()
@@ -24,9 +22,11 @@ const registerSchema = yup.object({
 export default function RegisterPage(props) {
   return (
     <View style={styles.container}>
+      <Text style={styles.headerText}>Sign Up</Text>
+      <Text style={styles.headerDescription}>Help us get to know you better</Text>
       <Formik
         initialValues={{name: "", phone: "", postal: "", unit: ""}}
-        validationSchema={registerSchema}
+        // validationSchema={registerSchema}
         onSubmit={
           // store data in db 
           (values) => { 
@@ -45,6 +45,7 @@ export default function RegisterPage(props) {
               onChangeText={handleChange("name")}
               value={values.name}
               onBlur={handleBlur("name")}
+              style={styles.inputContainer}
             />
             <Text>{touched.name && errors.name}</Text>
 
@@ -55,6 +56,7 @@ export default function RegisterPage(props) {
               value={values.phone}
               keyboardType="numeric"
               onBlur={handleBlur("phone")}
+              style={styles.inputContainer}
             />
             <Text>{touched.phone && errors.phone}</Text>
 
@@ -65,6 +67,7 @@ export default function RegisterPage(props) {
               value={values.postal}
               keyboardType="numeric"
               onBlur={handleBlur("postal")}
+              style={styles.inputContainer}
             />
             <Text>{touched.postal && errors.postal}</Text>
 
@@ -74,10 +77,15 @@ export default function RegisterPage(props) {
               onChangeText={handleChange("unit")}
               value={values.unit}
               onBlur={handleBlur("unit")}
+              style={styles.inputContainer}
             />
             <Text>{touched.unit && errors.unit}</Text>
 
-            <Button title="Register" onPress={handleSubmit}/>
+            <TouchableOpacity
+              onPress={handleSubmit}
+              style={styles.button}>
+              <Text style={styles.buttonText}>Confirm</Text>
+            </TouchableOpacity>
           </View>
         )}
 
@@ -89,8 +97,53 @@ export default function RegisterPage(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
+    backgroundColor: '#FAFBFD',
+    paddingHorizontal: 30,
+    paddingVertical: "30%",
+    // alignItems: 'center',
     justifyContent: 'center',
   },
+  headerText: {
+    fontWeight: "bold",
+    fontSize: 36,
+  }, 
+  headerDescription: {
+    paddingVertical: 20,
+    marginBottom: 50,
+    fontSize: 16,
+  }, 
+  inputContainer: {
+    borderRadius: 30,
+    height: 60,
+    marginBottom: 5,
+    paddingHorizontal: 30,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 8,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    backgroundColor : "#fff"
+  }, 
+  button: {
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 30,
+    height: 60,
+    marginTop: 50,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 8,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    backgroundColor : "#7041EE"
+  },
+  buttonText: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "white",
+  }
 });

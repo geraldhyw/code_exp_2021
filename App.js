@@ -9,15 +9,16 @@ export default function App() {
   const [particulars, setParticulars] = useState({
     postal: ""
   });
+  // console.disableYellowBox = true;
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{flex: 1, backgroundColor: '#FAFBFD',}}>
       {isLoggedIn ? 
-        (<NavigationContainer>
-            <BottomNav particulars={particulars}></BottomNav>
-          </NavigationContainer>)
-        :
-        (<RegisterPage setLoggedIn={setLoggedIn} setParticulars={setParticulars}></RegisterPage>)}
+      (<NavigationContainer>
+          <BottomNav particulars={particulars}></BottomNav>
+        </NavigationContainer>)
+      :
+      (<RegisterPage setLoggedIn={setLoggedIn} setParticulars={setParticulars}></RegisterPage>)}
     </SafeAreaView>
   )
 }

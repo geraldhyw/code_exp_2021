@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native';
 import { getBulletinList } from '../shared/bulletinList';
 import { useIsFocused } from '@react-navigation/native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 export default function BulletinPage({navigation, route}) {
   
@@ -10,35 +11,39 @@ export default function BulletinPage({navigation, route}) {
     return favor.postal == postal;
   }
 
+  // Check user for actual application, but not for demo purposes
   function checkUser(favor) {
     return favor.phone != phone;
   }
 
-  let favors = getBulletinList().filter(checkPostal).filter(checkUser);
+  // let favors = getBulletinList().filter(checkPostal).filter(checkUser);
+  let favors = getBulletinList().filter(checkPostal);
   const isFocused = useIsFocused();
 
   return (
     <View style={styles.container}>
-      <Text>Bulletin</Text>
       {isFocused ? 
       (<FlatList 
         data={favors.filter(checkPostal)}
         keyExtractor={item => item.id.toString()}
         renderItem={({item}) => (
           <View style={styles.favorContainer}>
-            <Text>{item.name}</Text>
-            <Text>{item.phone}</Text>
-            <Text>{item.description}</Text>
+            <View style={styles.containerLeft}>
+              <Text style={styles.favorTitle}>{item.title}</Text>
+              <Text style={styles.favorTip}>Tip: ${item.tip}</Text>
+            </View>
 
-            <TouchableOpacity 
-              style={styles.button}
-              onPress={() => {
-                navigation.navigate("Favour Details", {
-                  favorDetails: item
-                });
-              }}>
-              <Text>See More</Text>
-            </TouchableOpacity>
+            <View style={styles.containerRight}>
+              <TouchableOpacity 
+                style={styles.favorArrow}
+                onPress={() => {
+                  navigation.navigate("Favour Details", {
+                    favorDetails: item
+                  });
+                }}>
+                <Ionicons name={"arrow-forward"} size={32} color={"#ABABAB"} />
+              </TouchableOpacity>
+            </View>
           </View>
         )}
       />):<FlatList />}
@@ -49,16 +54,42 @@ export default function BulletinPage({navigation, route}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
+    backgroundColor: '#FAFBFD',
+    // alignItems: 'center',
     justifyContent: 'center',
   },
   favorContainer: {
-    backgroundColor: "grey",
-    padding: 10,
-    margin: 5,
+    backgroundColor: "white",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 8,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    backgroundColor : "#fff",
+    marginHorizontal: 30,
+    marginVertical: 8,
+    padding: 20,
+    borderRadius: 25,
+    flexDirection: "row",
+    justifyContent: "space-between"
   },
-  button: {
-    backgroundColor: "green",
-  }
+  containerLeft: {
+
+  },
+  containerRight: {
+    alignSelf: "center"
+  },
+  favorTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    paddingBottom: 5,
+  },
+  favorTip: {
+
+  },
+  favorArrow: {
+
+  },
 });
